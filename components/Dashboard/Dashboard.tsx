@@ -8,7 +8,7 @@ const Dashboard : React.FC = () => {
             {session ?(
                 <>
                     <h1>Dashboard</h1>
-                    <p>You are logged in as {session.user?.email}</p>
+                    <p>You are logged in  {session.user?.email}</p>
                     <pre>{JSON.stringify(session, null, 2)}</pre>
                 </>
             ): (
