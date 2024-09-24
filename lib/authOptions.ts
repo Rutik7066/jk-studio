@@ -12,7 +12,7 @@ export const authOptions = {
         params: { response_type: "code", scope: "openid,lr_partner_apis" },
       },
       token: "https://ims-na1.adobelogin.com/ims/token/v3",
-      userinfo: "https://ims-na1.adobelogin.com/ims/profile/v2",
+      userinfo: "https://ims-na1.adobelogin.com/ims/userinfo/v2",
       wellKnown:
         "https://ims-na1.adobelogin.com/ims/.well-known/openid-configuration",
       profile(profile) {
