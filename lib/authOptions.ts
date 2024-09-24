@@ -6,7 +6,7 @@ export const authOptions = {
       id: "adobe",
       name: "Adobe",
       clientId: process.env.ADOBE_CLIENT_ID as string,
-      clientSecret: process.env.ADOBE_CLIENT_SECRET as string,
+      clientSecret: process.env.NEXTAUTH_SECRET as string,
       authorization: {
         url: "https://ims-na1.adobelogin.com/ims/authorize/v2",
         params: { response_type: "code", scope: "openid,lr_partner_apis" },
