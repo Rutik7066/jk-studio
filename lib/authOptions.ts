@@ -15,16 +15,31 @@ export const authOptions = {
       userinfo: "https://ims-na1.adobelogin.com/ims/userinfo/v2",
       wellKnown:
         "https://ims-na1.adobelogin.com/ims/.well-known/openid-configuration",
-      profile(profile) {
-       
-        console.log(JSON.stringify(profile, null, 2));
-         return {
+      profile(profile, token) {
+        return {
           id: profile.sub,
-          name: profile.name,
-          email: profile.email,
+          profile: {...profile},
+          token :{ ...token},
         };
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, account }) {
+      // If it's the initial sign-in, add the access token to the JWT
+      if (account) {
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+        token.expires_at = account.expires_at;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      // Add the access token to the session object
+      session.accessToken = token.accessToken;
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET || "",
 };
