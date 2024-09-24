@@ -26,8 +26,10 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, account }) {
+
       // If it's the initial sign-in, add the access token to the JWT
       if (account) {
+        console.log(JSON.stringify(account,null,2))
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
         token.expires_at = account.expires_at;
