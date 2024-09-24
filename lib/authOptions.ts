@@ -8,16 +8,17 @@ export const authOptions = {
       clientId: process.env.ADOBE_CLIENT_ID || "",
       clientSecret: process.env.ADOBE_CLIENT_SECRET || "",
       authorization: {
-        url: "https://ims-na1.adobelogin.com/ims/authorize",
-        params: {
-          response_type: "code",
-          scope: "openid,creative_sdk",
-        },
+        url: "https://ims-na1.adobelogin.com/ims/authorize/v2",
+        params: { response_type: "code", scope: "openid,lr_partner_apis" },
       },
-      token: "https://ims-na1.adobelogin.com/ims/token",
-      userinfo: "https://ims-na1.adobelogin.com/ims/userinfo",
+      token: "https://ims-na1.adobelogin.com/ims/token/v3",
+      userinfo: "https://ims-na1.adobelogin.com/ims/profile/v2",
+      wellKnown:
+        "https://ims-na1.adobelogin.com/ims/.well-known/openid-configuration",
       profile(profile) {
-        return {
+       
+        console.log(JSON.stringify(profile, null, 2));
+         return {
           id: profile.sub,
           name: profile.name,
           email: profile.email,
