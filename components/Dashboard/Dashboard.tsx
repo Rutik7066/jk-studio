@@ -13,8 +13,11 @@ const Dashboard: React.FC = () => {
             const timer = setInterval(() => {
                 const expiresAt = DateTime.fromISO(session.expires as string)
                 const now = DateTime.now()
-                const diff = expiresAt.diff(now, ["seconds"])
-                setTimeLeft(Math.max(0, Math.floor(diff.seconds)).toString())
+                const diff = expiresAt.diff(now, ["hours", "minutes", "seconds"])
+                const hours = Math.max(0, Math.floor(diff.hours))
+                const minutes = Math.max(0, Math.floor(diff.minutes))
+                const seconds = Math.max(0, Math.floor(diff.seconds))
+                setTimeLeft(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`)
             }, 1000)
 
             return () => clearInterval(timer)
